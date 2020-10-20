@@ -139,7 +139,7 @@ bool islesser(bst*  root,int val)
     else
     return false;
 }
-//function to check if the vlue in right sub-tree from root node passed from bst_util() is greater or not
+//function to check if the value in right sub-tree from root node passed from bst_util() is greater or not
 bool isgreater(bst*  root,int val)
 {
     if(root==NULL)
