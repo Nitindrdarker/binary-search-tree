@@ -129,7 +129,7 @@ void postordered(bst* root)
     cout<<root->data<<" ";
 }
 //function for checkin fi the tree is binary searcg tree or not (not so efficient)
-//function to check if the vlue in left sub-tree from root node passed from bst_util() is lesser or not
+//function to check if the value in left sub-tree from root node passed from bst_util() is lesser or not
 bool islesser(bst*  root,int val)
 {
     if(root==NULL)
