@@ -160,6 +160,29 @@ bool bst_util(bst *root)
     return false;
     
 }
+//function to check if the tree is bst or not (efficient way)
+bool binary_tree_utility(bst *root,long long int min_limit,long long int max_limit)
+{
+    if(root==NULL)
+    return true;
+    if((root->data>min_limit)&&(root->data<=max_limit)&&(binary_tree_utility(root->left,min_limit,root->data))&&(binary_tree_utility(root->right,root->data,max_limit)))
+    return true;
+    else
+    {
+        return false;
+    }
+    
+}
+bool isbinarysearchtree(bst *root)
+{
+    if(root==NULL)
+    {
+        return true;
+    }
+     return binary_tree_utility(root,INT64_MIN,INT64_MAX);
+}
+
+
 //main function
 int main()
 {
@@ -198,5 +221,9 @@ int main()
         cout<<"\nnot  binary tree!"<<endl;
     }
     
+    if(isbinarysearchtree(root))
+    cout<<"\nbinary tree\n";
+    else
+    cout<<"\nnot binary tree\n";
     return 0;
 }
