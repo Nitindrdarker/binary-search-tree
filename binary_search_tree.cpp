@@ -213,7 +213,7 @@ bst* delete_node(bst *root,int data)
             delete root;
             root=NULL;
         }
-        //for 1 chile node
+        //for 1 child node
         //for right sub tree
         else if(root->right==NULL)
         {
@@ -227,6 +227,7 @@ bst* delete_node(bst *root,int data)
             root=root->right;
             delete temp;
         }
+        //for two  child node
         else
         {
             bst *temp= min_node_add(root->right);
