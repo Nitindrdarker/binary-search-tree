@@ -221,6 +221,7 @@ bst* delete_node(bst *root,int data)
             root=root->left;
             delete temp;
         }
+        //for left sub tree
         else if(root->left==NULL)
         {
             bst *temp=root;
