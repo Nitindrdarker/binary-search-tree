@@ -181,7 +181,62 @@ bool isbinarysearchtree(bst *root)
     }
      return binary_tree_utility(root,INT64_MIN,INT64_MAX);
 }
-
+//function to find the minimum value root address
+bst* min_node_add(bst* root)
+{
+    while(root->left!=NULL)
+    {
+        root=root->left;
+    }
+    return root;
+}
+//deleting a node in binary tree
+bst* delete_node(bst *root,int data)
+{
+    if(root==NULL)
+    {
+        return root;
+    }
+    else if(root->data>data)
+    {
+        root->left=delete_node(root->left,data);
+    }
+    else if(root->data<data)
+    {
+        root->right=delete_node(root->right,data);
+    }
+    else
+    {
+        //for 0 child node
+        if(root->left==NULL&&root->right==NULL)
+        {
+            delete root;
+            root=NULL;
+        }
+        //for 1 chile node
+        //for right sub tree
+        else if(root->right==NULL)
+        {
+            bst* temp=root;
+            root=root->left;
+            delete temp;
+        }
+        else if(root->left==NULL)
+        {
+            bst *temp=root;
+            root=root->right;
+            delete temp;
+        }
+        else
+        {
+            bst *temp= min_node_add(root->right);
+            root->data=temp->data;
+            root->right=delete_node(root->right,temp->data);
+        }
+    }
+    return root;
+    
+}
 
 //main function
 int main()
@@ -225,5 +280,9 @@ int main()
     cout<<"\nbinary tree\n";
     else
     cout<<"\nnot binary tree\n";
+
+    root=delete_node(root,25);
+    cout<<"after deletion of node\n";
+    inordered(root);
     return 0;
 }
