@@ -322,7 +322,7 @@ int main()
     root=delete_node(root,25);
     cout<<"after deletion of node\n";
     inordered(root);
-    bst *successor=Getsuccessor(root,25);
+    bst *successor=Getsuccessor(root,1);
     if(successor==NULL)
     {
         cout<<"\nno successor found\n";
