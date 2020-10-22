@@ -285,7 +285,8 @@ int main()
     root=insert_node(root,5);
     root=insert_node(root,3);
     root=insert_node(root,1);
-    
+    root=insert_node(root,2);
+    root=insert_node(root,0);
     if(search_node(root,25))
     {
         cout<<"found\n";
@@ -322,7 +323,7 @@ int main()
     root=delete_node(root,25);
     cout<<"after deletion of node\n";
     inordered(root);
-    bst *successor=Getsuccessor(root,1);
+    bst *successor=Getsuccessor(root,2);
     if(successor==NULL)
     {
         cout<<"\nno successor found\n";
