@@ -128,7 +128,7 @@ void postordered(bst* root)
     postordered(root->right);
     cout<<root->data<<" ";
 }
-//function for checkin fi the tree is binary searcg tree or not (not so efficient)
+//function for checkin if the tree is binary searcg tree or not (not so efficient)
 //function to check if the value in left sub-tree from root node passed from bst_util() is lesser or not
 bool islesser(bst*  root,int val)
 {
@@ -239,17 +239,53 @@ bst* delete_node(bst *root,int data)
     return root;
     
 }
+bst* Find(bst *root, int data) {
+	if(root == NULL) return NULL;
+	else if(root->data == data) return root;
+	else if(root->data < data) return Find(root->right,data);
+	else return Find(root->left,data);
+}
+
+//Function to find Node with minimum value in a BST
+bst* FindMin(bst* root) {
+	if(root == NULL) return NULL;
+	while(root->left != NULL)
+		root = root->left;
+	return root;
+}
+
+//Function to find Inorder Successor in a BST
+bst* Getsuccessor(bst* root,int data) {
+	// Search the Node - O(h)
+	bst *current = Find(root,data);
+	if(current == NULL) return NULL;
+	if(current->right != NULL) {  //Case 1: Node has right subtree
+		return FindMin(current->right); // O(h)
+	}
+	else {   //Case 2: No right subtree  - O(h)
+		bst* successor = NULL;
+		bst* ancestor = root;
+		while(ancestor != current) {
+			if(current->data < ancestor->data) {
+				successor = ancestor; // so far this is the deepest node for which current node is in left
+				ancestor = ancestor->left;
+			}
+			else
+				ancestor = ancestor->right;
+		}
+		return successor;
+	}
+}
 
 //main function
+
 int main()
 {
     bst* root=NULL;
-    root=insert_node(root,15);
-    root=insert_node(root,10);
-    root=insert_node(root,20);
-    root=insert_node(root,25);
-    root=insert_node(root,8);
-    root=insert_node(root,12);
+    root=insert_node(root,5);
+    root=insert_node(root,3);
+    root=insert_node(root,1);
+    
     if(search_node(root,25))
     {
         cout<<"found\n";
@@ -286,5 +322,15 @@ int main()
     root=delete_node(root,25);
     cout<<"after deletion of node\n";
     inordered(root);
+    bst *successor=Getsuccessor(root,25);
+    if(successor==NULL)
+    {
+        cout<<"\nno successor found\n";
+    }
+    else
+    {
+        cout<<"\nsuccessor found\n"<<successor->data;
+    }
+    
     return 0;
 }
